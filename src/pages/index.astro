@@ -1,0 +1,762 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ThemeToggle from '../components/ThemeToggle.tsx';
+import BinderSearch from '../components/BinderSearch.tsx';
+import TabBar from '../components/TabBar.tsx';
+import DocumentModal from '../components/DocumentModal.tsx';
+import AiLegalSuite from '../components/AiLegalSuite.tsx';
+---
+
+<BaseLayout
+  title="TRP Application Binder & Legal Brief | IRPA s. 24(1)"
+  description="TRP Application Binder & Legal Submission Brief under IRPA s. 24(1) for Justin Louis Hardy FASSIO (UCI: 11-2962-5822)"
+>
+  <header class="no-print bg-navy-900 text-white border-b border-navy-700 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-navy-800 border border-gold-500/40 rounded-lg text-gold-400">
+            <i class="fa-solid fa-scale-balanced text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-gold-500/20 text-gold-300 border border-gold-500/30 rounded">
+                Official IRPA s. 24(1) Submission
+              </span>
+              <span class="text-xs text-slate-400">| Priority Consideration</span>
+            </div>
+            <h1 class="text-lg font-bold tracking-tight text-white flex items-center gap-2">
+              TRP Application Package Binder
+            </h1>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 text-xs">
+          <div class="bg-navy-950/80 px-3 py-1.5 rounded-md border border-navy-700/80">
+            <span class="text-slate-400">Applicant:</span>
+            <strong class="text-white ml-1">Justin Louis Hardy FASSIO</strong>
+          </div>
+          <div class="bg-navy-950/80 px-3 py-1.5 rounded-md border border-navy-700/80">
+            <span class="text-slate-400">UCI:</span>
+            <strong class="text-gold-400 ml-1">11-2962-5822</strong>
+          </div>
+          <div class="bg-navy-950/80 px-3 py-1.5 rounded-md border border-navy-700/80 hidden lg:block">
+            <span class="text-slate-400">Child:</span>
+            <strong class="text-white ml-1">Ava FASSIO (Age 6)</strong>
+          </div>
+
+          <div class="flex items-center space-x-2 ml-auto md:ml-0">
+            <a
+              href="strategy"
+              target="_blank"
+              rel="noopener"
+              class="px-3 py-1.5 bg-gold-600 hover:bg-gold-700 text-navy-950 rounded font-semibold flex items-center gap-1.5 transition"
+              title="Open the Master Strategy Brief (guiding document, not part of the binder)"
+            >
+              <i class="fa-solid fa-compass"></i>
+              <span class="hidden sm:inline">Strategy Brief</span>
+            </a>
+            <ThemeToggle client:load />
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-2 sm:px-4 lg:px-8 py-6 flex flex-col">
+    <div class="no-print mb-4">
+      <button
+        onclick="window.print()"
+        class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded font-medium flex items-center gap-1.5 transition"
+        title="Print or Save to PDF"
+      >
+        <i class="fa-solid fa-print"></i>
+        <span>Print / PDF</span>
+      </button>
+    </div>
+
+    <div class="no-print mb-6 bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-5 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 flex-grow">
+        <div class="border-l-2 border-navy-600 pl-3">
+          <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase font-medium">Jurisdiction</span>
+          <span class="text-sm font-semibold text-slate-900 dark:text-slate-100">Supreme Court of BC</span>
+          <span class="block text-xs text-slate-500">Kelowna File No. 139323</span>
+        </div>
+        <div class="border-l-2 border-emerald-500 pl-3">
+          <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase font-medium">Primary Need</span>
+          <span class="text-sm font-semibold text-emerald-700 dark:text-emerald-400">50/50 Equal Custody</span>
+          <span class="block text-xs text-slate-500">BIOC Mandate (Kanthasamy)</span>
+        </div>
+        <div class="border-l-2 border-amber-500 pl-3">
+          <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase font-medium">U.S. Domicile Anchor</span>
+          <span class="text-sm font-semibold text-slate-900 dark:text-slate-100">$2.3M Living Trust & POA</span>
+          <span class="block text-xs text-slate-500">Aptos Real Estate + VA Pension</span>
+        </div>
+        <div class="border-l-2 border-blue-500 pl-3">
+          <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase font-medium">Compliance History</span>
+          <span class="text-sm font-semibold text-blue-700 dark:text-blue-400">100% Departure Rate</span>
+          <span class="block text-xs text-slate-500">IMM 1282 Allowed to Leave</span>
+        </div>
+      </div>
+
+      <BinderSearch client:load />
+    </div>
+
+    <TabBar client:load />
+
+    <div class="binder-container flex-grow bg-white dark:bg-slate-800 rounded-b-xl lg:rounded-tr-xl shadow-xl border border-slate-200 dark:border-slate-700 p-4 sm:p-8 relative">
+      <div id="content-master" class="tab-content hidden space-y-6">
+        <div class="border-b border-slate-200 dark:border-slate-700 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">Master Compilation Index</span>
+            <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Master Table of Contents & Submission Architecture</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              IRPA Section 24(1) Application Binder — Justin Louis Hardy FASSIO (UCI: 11-2962-5822)
+            </p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
+              <i class="fa-solid fa-check-circle mr-1"></i> 18 Supporting Documents Verified
+            </span>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+          <table class="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+            <thead class="bg-slate-50 dark:bg-slate-900/60 text-xs uppercase text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="py-3 px-4 w-20">Tab Ref</th>
+                <th class="py-3 px-4">Section / Document Description</th>
+                <th class="py-3 px-4">Document Source / Reference</th>
+                <th class="py-3 px-4 text-center">Verification Status</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 font-medium">
+              <tr class="bg-navy-50/50 dark:bg-slate-900/30">
+                <td colspan="5" class="py-2 px-4 font-bold text-navy-900 dark:text-gold-400 text-xs uppercase tracking-wider">
+                  TAB 1: OFFICIAL FORMS & FEES
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">1.1</td>
+                <td class="py-3 px-4">Official Document Checklist (IMM 5557 / IMM 5939)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">IRCC Official Form</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200">Verified</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('1.1')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">1.2</td>
+                <td class="py-3 px-4">Application to Change Conditions / TRP Request (IMM 5708)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">IRCC Official Form (Barcode Page Top)</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">Signed</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('1.2')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">1.3</td>
+                <td class="py-3 px-4">Use of a Representative Form (IMM 5476)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Ocana Law Group (Kelowna, BC)</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">Retained</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('1.3')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">1.4</td>
+                <td class="py-3 px-4">IRCC Fee Payment Receipt ($229.77 / $246.25 CAD)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Official IRCC Portal Payment Receipt</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">Paid</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('1.4')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+
+              <tr class="bg-navy-50/50 dark:bg-slate-900/30">
+                <td colspan="5" class="py-2 px-4 font-bold text-navy-900 dark:text-gold-400 text-xs uppercase tracking-wider">
+                  TAB 2: FORMAL LEGAL SUBMISSION BRIEF
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">2.1</td>
+                <td class="py-3 px-4 font-semibold text-navy-800 dark:text-gold-300">Counsel Legal Submission Brief: Statutory Basis, BIOC & Rebuttal</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Retained Counsel (Ocana Law Group)</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">Master Brief</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="window.switchTab && window.switchTab('tab2')" class="text-xs text-navy-600 dark:text-gold-400 font-bold hover:underline">Read Brief</button></td>
+              </tr>
+
+              <tr class="bg-navy-50/50 dark:bg-slate-900/30">
+                <td colspan="5" class="py-2 px-4 font-bold text-navy-900 dark:text-gold-400 text-xs uppercase tracking-wider">
+                  TAB 3: BEST INTERESTS OF THE CHILD (BIOC) & FAMILY COURT MANDATE
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">3.1</td>
+                <td class="py-3 px-4">BC Supreme Court Order (Kelowna File No. 139323) — 50/50 Custody & Non-Relocation</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Certified Court Seal Document</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">Court Order</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('3.1')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">3.2</td>
+                <td class="py-3 px-4">Ava’s School Enrollment & Academic Activity Records (Kelowna, BC)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Kelowna School District Administration</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200">Official Letter</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('3.2')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">3.3</td>
+                <td class="py-3 px-4">Co-Parenting Calendar & Court-Ordered Parenting Schedule Log</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Sworn Statutory Declaration & Shared Calendar</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200">Sworn Statement</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('3.3')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+
+              <tr class="bg-navy-50/50 dark:bg-slate-900/30">
+                <td colspan="5" class="py-2 px-4 font-bold text-navy-900 dark:text-gold-400 text-xs uppercase tracking-wider">
+                  TAB 4: U.S. DOMICILE, FIDUCIARY DUTIES & REAL ESTATE EQUITY
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">4.1</td>
+                <td class="py-3 px-4">California Revocable Living Trust Abstract ($2.3M Aptos Estate + ADU)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Santa Cruz County Assessor & Legal Trust Abstract</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Beneficiary Title</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('4.1')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">4.2</td>
+                <td class="py-3 px-4">Active Power of Attorney (POA) Legal Designation for Mother’s Estate</td>
+                <td class="py-3 px-4 text-xs text-slate-500">State of California Legal Instrument</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Active Duty</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('4.2')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">4.3</td>
+                <td class="py-3 px-4">Title & Property Records: Chico & Shasta Lake Estates</td>
+                <td class="py-3 px-4 text-xs text-slate-500">County Public Deeds & Assessments</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200">Verified</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('4.3')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">4.4</td>
+                <td class="py-3 px-4">U.S. Business Entities, VA Disability Pension, & IRS Filings</td>
+                <td class="py-3 px-4 text-xs text-slate-500">U.S. Dept of Veterans Affairs / IRS Form 1040</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">Guaranteed Income</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('4.4')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+
+              <tr class="bg-navy-50/50 dark:bg-slate-900/30">
+                <td colspan="5" class="py-2 px-4 font-bold text-navy-900 dark:text-gold-400 text-xs uppercase tracking-wider">
+                  TAB 5: FINANCIAL PROVENANCE & LIQUID FUNDS SEASONING
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">5.1</td>
+                <td class="py-3 px-4">Vehicle Equity Sale Paper Trail ($26k Sale, $7k Payoff = $14.3k Net)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Bill of Sale, Lender Payoff, Deposit Receipts</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">Audit Trailed</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('5.1')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">5.2</td>
+                <td class="py-3 px-4">Mother’s Sworn Rent Support Affidavit ($2,200/mo CAD Kelowna Support)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">Sworn Statutory Declaration & Cost Analysis</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200">Sworn Support</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('5.2')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">5.3</td>
+                <td class="py-3 px-4">6-Month Bank Statements & VA Benefit Verification Statements</td>
+                <td class="py-3 px-4 text-xs text-slate-500">U.S. Financial Institution Statements</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200">Seasoned</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('5.3')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+
+              <tr class="bg-navy-50/50 dark:bg-slate-900/30">
+                <td colspan="5" class="py-2 px-4 font-bold text-navy-900 dark:text-gold-400 text-xs uppercase tracking-wider">
+                  TAB 6: IMMIGRATION & COMPLIANCE HISTORY (GCMS ATIP REBUTTAL)
+                </td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">6.1</td>
+                <td class="py-3 px-4">Full CBSA ATIP File Release P-2026-30692 (GCMS Target Record)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">CBSA ATIP Disclosure Release</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300">Target Record</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('6.1')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">6.2</td>
+                <td class="py-3 px-4">Proof of Voluntary Departure — Sept 23, 2024 VR Refusal (V353909420)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">IRCC Portal Record / CBP Entry Stamp</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">100% Compliant</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('6.2')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">6.3</td>
+                <td class="py-3 px-4">Proof of Voluntary Departure — June 3, 2026 Form IMM 1282 (Allowed to Leave)</td>
+                <td class="py-3 px-4 text-xs text-slate-500">CBSA Executed Form IMM 1282</td>
+                <td class="py-3 px-4 text-center"><span class="px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">Voluntary Exit</span></td>
+                <td class="py-3 px-4 text-right"><button onclick="viewDoc('6.3')" class="text-xs text-navy-600 dark:text-gold-400 hover:underline">Inspect</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="content-tab1" class="tab-content hidden space-y-6">
+        <div class="border-b border-slate-200 dark:border-slate-700 pb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">Tab 1 Submission Package</span>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Official Forms & Government Processing Fees</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900/40">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <span class="p-2 rounded bg-navy-100 text-navy-800 dark:bg-navy-900 dark:text-navy-200 font-bold text-sm">1.1</span>
+                <div>
+                  <h3 class="font-bold text-slate-900 dark:text-white text-sm">Official Document Checklist</h3>
+                  <p class="text-xs text-slate-500">IMM 5557 / IMM 5939</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 text-xs rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 font-medium">Completed</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-3">
+              Includes all mandatory temporary resident permit checklists, cross-referenced with IRCC inland and consular submission guidelines.
+            </p>
+          </div>
+
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900/40">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <span class="p-2 rounded bg-navy-100 text-navy-800 dark:bg-navy-900 dark:text-navy-200 font-bold text-sm">1.2</span>
+                <div>
+                  <h3 class="font-bold text-slate-900 dark:text-white text-sm">TRP Application / Change Conditions</h3>
+                  <p class="text-xs text-slate-500">IMM 5708 / Consular Form</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 text-xs rounded bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 font-medium">Validated</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-3">
+              Duly executed application requesting temporary residence under IRPA s. 24(1). Barcode page placed as the top page of the package.
+            </p>
+          </div>
+
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900/40">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <span class="p-2 rounded bg-navy-100 text-navy-800 dark:bg-navy-900 dark:text-navy-200 font-bold text-sm">1.3</span>
+                <div>
+                  <h3 class="font-bold text-slate-900 dark:text-white text-sm">Use of a Representative</h3>
+                  <p class="text-xs text-slate-500">IMM 5476 — Ocana Law Group</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 text-xs rounded bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 font-medium">Active POA</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-3">
+              Formal legal representation authorization designating Ocana Law Group (Kelowna, BC) as legal counsel of record.
+            </p>
+          </div>
+
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-900/40">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <span class="p-2 rounded bg-navy-100 text-navy-800 dark:bg-navy-900 dark:text-navy-200 font-bold text-sm">1.4</span>
+                <div>
+                  <h3 class="font-bold text-slate-900 dark:text-white text-sm">IRCC Fee Payment Receipt</h3>
+                  <p class="text-xs text-slate-500">$229.77 / $246.25 CAD TRP Fee</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 text-xs rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300 font-medium">Paid</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-3">
+              Official eReceipt confirming full payment of statutory TRP processing fees attached directly behind document checklist.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-tab2" class="tab-content space-y-6">
+        <div class="bg-navy-900 text-white rounded-xl p-6 shadow-md relative overflow-hidden">
+          <div class="absolute right-4 top-4 opacity-10 text-8xl font-serif">§</div>
+          <div class="relative z-10">
+            <div class="flex items-center space-x-2 text-gold-400 text-xs uppercase font-semibold tracking-widest mb-2">
+              <span>Tab 2.1</span>
+              <span>•</span>
+              <span>Formal Legal Submission Brief</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-serif font-bold tracking-wide">
+              FORMAL LEGAL SUBMISSION BRIEF
+            </h2>
+            <p class="text-slate-300 text-xs sm:text-sm mt-2 max-w-3xl">
+              In the Matter of an Application for a Temporary Resident Permit (TRP) pursuant to Section 24(1) of the <em>Immigration and Refugee Protection Act</em> (IRPA)
+            </p>
+
+            <div class="mt-4 pt-4 border-t border-navy-700/80 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <div><span class="text-slate-400">TO:</span> Designated Decision-Maker / Senior Immigration Officer</div>
+              <div><span class="text-slate-400">APPLICANT:</span> Justin Louis Hardy FASSIO</div>
+              <div><span class="text-slate-400">UCI:</span> 11-2962-5822</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50/30 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 rounded-xl p-6 sm:p-10 font-serif leading-relaxed text-slate-800 dark:text-slate-200 text-sm sm:text-base space-y-8 shadow-inner">
+
+          <section class="space-y-4">
+            <h3 class="text-lg font-bold font-sans text-navy-900 dark:text-gold-400 border-b border-slate-300 dark:border-slate-700 pb-2 flex items-center gap-2">
+              <span class="bg-navy-900 text-white text-xs px-2 py-0.5 rounded font-mono">I</span>
+              EXECUTIVE SUMMARY & STATUTORY BASIS
+            </h3>
+            <p>
+              <strong>1.</strong> This application respectfully requests the issuance of a Temporary Resident Permit (TRP) pursuant to Subsection 24(1) of the <em>Immigration and Refugee Protection Act</em> (IRPA). The Applicant, <strong>Justin Louis Hardy FASSIO</strong>, is a citizen of the United States of America and the equal joint-guardian of a six-year-old Canadian Citizen child, <strong>Ava FASSIO</strong>, who resides in Kelowna, British Columbia.
+            </p>
+            <p>
+              <strong>2.</strong> The issuance of a TRP is justified by compelling humanitarian factors, specifically the <strong>Best Interests of the Child (BIOC)</strong> as articulated by the Supreme Court of Canada in <em>Kanthasamy v. Canada (Citizenship and Immigration)</em>, 2015 SCC 61, weighed against a technical non-compliance finding recorded under IRPA ss. 41(a) and 20(1)(a) at the Osoyoos Port of Entry on June 3, 2026.
+            </p>
+            <div class="p-4 bg-navy-50 dark:bg-navy-950/60 border-l-4 border-navy-700 dark:border-gold-500 rounded text-xs font-sans space-y-2">
+              <span class="font-bold text-navy-900 dark:text-gold-300 uppercase">Statutory Balancing Framework (IRPA s. 24(1)):</span>
+              <p class="text-slate-700 dark:text-slate-300">
+                An officer evaluating a TRP request must balance the <strong>compelling need</strong> of the applicant to enter or remain in Canada against any <strong>risk</strong> to Canadian society or program integrity (CBSA Operational Manual ENF 23). The Applicant presents zero criminality, an unbroken history of voluntary compliance, and substantial financial self-sufficiency.
+              </p>
+            </div>
+          </section>
+
+          <section class="space-y-4">
+            <h3 class="text-lg font-bold font-sans text-navy-900 dark:text-gold-400 border-b border-slate-300 dark:border-slate-700 pb-2 flex items-center gap-2">
+              <span class="bg-navy-900 text-white text-xs px-2 py-0.5 rounded font-mono">II</span>
+              THE LEGISLATIVE VOID & THE CUSTODY PARADOX
+            </h3>
+            <p>
+              <strong>3.</strong> <u>The Relocation Prohibition:</u> Under a binding Order of the Supreme Court of British Columbia (Kelowna Registry, File No. 139323, Term 16), Ava FASSIO is legally prohibited from being relocated outside the province of British Columbia. The Applicant and the child's mother share 50/50 joint physical custody and guardianship.
+            </p>
+            <p>
+              <strong>4.</strong> <u>The Legislative Void:</u> Canadian immigration legislation contains no dedicated temporary or permanent visa stream for foreign national parents of minor Canadian citizen children who are bound by Canadian family court mandates.
+            </p>
+            <p>
+              <strong>5.</strong> <u>The Custody Paradox:</u> Refusing entry to the father creates a structural paradox. The Supreme Court of British Columbia mandates that the child remain in Kelowna with equal access to both parents, while the immigration authority excludes the father from the country. This paradox directly violates BIOC principles by stripping a 6-year-old Canadian child of her court-ordered equal parent.
+            </p>
+          </section>
+
+          <section class="space-y-4">
+            <h3 class="text-lg font-bold font-sans text-navy-900 dark:text-gold-400 border-b border-slate-300 dark:border-slate-700 pb-2 flex items-center gap-2">
+              <span class="bg-navy-900 text-white text-xs px-2 py-0.5 rounded font-mono">III</span>
+              REBUTTAL OF CBSA GCMS FINDINGS (FILE P-2026-30692)
+            </h3>
+
+            <div class="space-y-4 font-sans text-xs sm:text-sm">
+              <div class="p-3 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-800">
+                <span class="font-bold text-navy-800 dark:text-gold-300">1. Uncodified Legal Threshold:</span>
+                <p class="mt-1 text-slate-700 dark:text-slate-300">
+                  The inspecting officer at Osoyoos POE explicitly stated in GCMS notes that an applicant <em>"must spend the majority of his time outside of Canada."</em> This requirement appears nowhere in the IRPA or IRPR. Applying an uncodified, informal "rule of thumb" constitutes an error of law and a fettering of discretion (<em>Stemijon Investments Ltd. v. Canada</em>, 2011 FCA 299).
+                </p>
+              </div>
+
+              <div class="p-3 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-800">
+                <span class="font-bold text-navy-800 dark:text-gold-300">2. Statutory Dual Intent (IRPA s. 22(2)):</span>
+                <p class="mt-1 text-slate-700 dark:text-slate-300">
+                  Holding a desire to secure permanent residence in the future does not preclude temporary entry (<em>Jewell v. Canada</em>, 2015 FC 1046; <em>Williams v. Canada</em>, 2020 FC 8). The Applicant's prior 2021 Express Entry profile (E002017531) demonstrates transparent, lawful aspirations, not non-compliant intent.
+                </p>
+              </div>
+
+              <div class="p-3 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-800">
+                <span class="font-bold text-navy-800 dark:text-gold-300">3. Procedural Defect in s. 41(a) Charge:</span>
+                <p class="mt-1 text-slate-700 dark:text-slate-300">
+                  The primary GCMS charge under IRPA s. 41(a) contains a blank "specifically:" clause. Leaving the core operational field blank undercuts administrative notice and procedural fairness under <em>Vavilov</em>.
+                </p>
+              </div>
+
+              <div class="p-3 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-800">
+                <span class="font-bold text-navy-800 dark:text-gold-300">4. Misconstrued U.S. Domicile & Fiduciary Ties:</span>
+                <p class="mt-1 text-slate-700 dark:text-slate-300">
+                  The officer erroneously noted "few U.S. ties" while ignoring the Applicant's active Power of Attorney and primary beneficiary status under a California Revocable Living Trust holding $2.3M in Aptos real estate, alongside VA disability pension ties.
+                </p>
+              </div>
+
+              <div class="p-3 border border-slate-300 dark:border-slate-700 rounded bg-white dark:bg-slate-800">
+                <span class="font-bold text-navy-800 dark:text-gold-300">5. Unbroken 100% Compliance History:</span>
+                <p class="mt-1 text-slate-700 dark:text-slate-300">
+                  The Applicant departed Canada immediately upon his September 23, 2024 VR extension refusal (due to strike-related passport delays) and voluntarily signed an Allowed to Leave (IMM 1282) on June 3, 2026. He has zero history of overstaying.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="space-y-4">
+            <h3 class="text-lg font-bold font-sans text-navy-900 dark:text-gold-400 border-b border-slate-300 dark:border-slate-700 pb-2 flex items-center gap-2">
+              <span class="bg-navy-900 text-white text-xs px-2 py-0.5 rounded font-mono">IV</span>
+              CONCLUSION & RELIEF SOUGHT
+            </h3>
+            <p>
+              <strong>6.</strong> The Applicant meets all statutory criteria for a Temporary Resident Permit under IRPA s. 24(1). The compelling need to parent a minor Canadian child under a Supreme Court mandate far outweighs any administrative program-integrity risk.
+            </p>
+            <p>
+              <strong>RELIEF REQUESTED:</strong> That a Temporary Resident Permit (TRP) be issued for a duration of 12 to 24 months, with conditions authorizing visitor status to fulfill court-ordered parenting obligations in Kelowna, British Columbia.
+            </p>
+
+            <div class="pt-6 border-t border-slate-300 dark:border-slate-700 font-sans flex justify-between items-end">
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-semibold">Respectfully Submitted,</p>
+                <p class="font-bold text-slate-900 dark:text-white mt-1">Ocana Law Group</p>
+                <p class="text-xs text-slate-600 dark:text-slate-400">Barristers & Solicitors | Kelowna, BC</p>
+                <p class="text-xs text-slate-500">Counsel for Justin Louis Hardy FASSIO</p>
+              </div>
+              <div class="text-right">
+                <span class="stamp-badge px-3 py-1 text-xs inline-block">Certified Binder Submission</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="content-tab3" class="tab-content hidden space-y-6">
+        <div class="border-b border-slate-200 dark:border-slate-700 pb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">Tab 3 Exhibits</span>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Best Interests of the Child (BIOC) & Court Orders</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-1 bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300 rounded font-bold text-xs">Tab 3.1</span>
+              <i class="fa-solid fa-gavel text-red-600"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">BC Supreme Court Order</h3>
+            <p class="text-xs text-slate-500">Kelowna Registry, File No. 139323</p>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-4">
+              <li>50/50 Joint Physical Custody & Guardianship</li>
+              <li><strong>Term 16:</strong> Strict prohibition against relocating child outside BC</li>
+              <li>Certified Court Seal included</li>
+            </ul>
+            <button onclick="viewDoc('3.1')" class="w-full py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+              View Certified Order
+            </button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 rounded font-bold text-xs">Tab 3.2</span>
+              <i class="fa-solid fa-school text-blue-600"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">Ava’s School Records</h3>
+            <p class="text-xs text-slate-500">Kelowna Elementary School District</p>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-4">
+              <li>Official Enrollment Confirmation</li>
+              <li>Father designated as primary emergency contact</li>
+              <li>Extracurricular activity participation logs</li>
+            </ul>
+            <button onclick="viewDoc('3.2')" class="w-full py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+              View School Letter
+            </button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2 py-1 bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 rounded font-bold text-xs">Tab 3.3</span>
+              <i class="fa-solid fa-calendar-days text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-base">Co-Parenting Log</h3>
+            <p class="text-xs text-slate-500">Sworn Parenting Schedule Log</p>
+            <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1 list-disc pl-4">
+              <li>2024–2026 detailed parenting time logs</li>
+              <li>Sworn Statutory Declaration from Father</li>
+              <li>Demonstrates active daily fatherhood involvement</li>
+            </ul>
+            <button onclick="viewDoc('3.3')" class="w-full py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-200 text-xs font-semibold rounded transition">
+              View Parenting Log
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-tab4" class="tab-content hidden space-y-6">
+        <div class="border-b border-slate-200 dark:border-slate-700 pb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">Tab 4 Exhibits</span>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">U.S. Domicile, Living Trust & Fiduciary Duties</h2>
+        </div>
+
+        <div class="p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-amber-500 text-white rounded-lg">
+              <i class="fa-solid fa-house-chimney text-xl"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold text-amber-800 dark:text-amber-300 uppercase">Verified California Domicile Anchor</span>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">$2,235,000 – $2,360,000 Aptos Real Estate Estate</h3>
+            </div>
+          </div>
+          <span class="px-3 py-1 bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-100 rounded-full font-bold text-xs">
+            Primary Beneficiary & Active POA
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">Tab 4.1</span>
+              <span class="text-xs text-amber-600 font-bold">$2.3M Valuation</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">California Revocable Living Trust Abstract</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Covers Aptos Main House + ADU in Santa Cruz County. Confirms Applicant as primary sole beneficiary with vested equity.
+            </p>
+            <button onclick="viewDoc('4.1')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">
+              Inspect Trust Deeds →
+            </button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">Tab 4.2</span>
+              <span class="text-xs text-emerald-600 font-bold">Active Fiduciary Duty</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Legal Power of Attorney (POA) Instrument</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Grants legal authority over mother's estate. Establishes non-discretionary legal responsibilities anchored directly in California.
+            </p>
+            <button onclick="viewDoc('4.2')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">
+              Inspect POA Instrument →
+            </button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">Tab 4.3</span>
+              <span class="text-xs text-slate-500">Public Deeds</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Chico & Shasta Lake Real Estate Holdings</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              County assessor records establishing additional real property anchors across California.
+            </p>
+            <button onclick="viewDoc('4.3')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">
+              Inspect Titles →
+            </button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700">Tab 4.4</span>
+              <span class="text-xs text-emerald-600 font-bold">~$2,300/mo CAD VA Pension</span>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">VA Disability Pension & Business Filings</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              U.S. Department of Veterans Affairs lifetime benefit verification alongside active IRS tax compliance.
+            </p>
+            <button onclick="viewDoc('4.4')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">
+              Inspect VA Statement →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-tab5" class="tab-content hidden space-y-6">
+        <div class="border-b border-slate-200 dark:border-slate-700 pb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">Tab 5 Exhibits</span>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Financial Provenance & Seasoned Liquid Funds Audit</h2>
+        </div>
+
+        <div class="p-5 border border-emerald-200 dark:border-emerald-800/60 bg-emerald-50/50 dark:bg-emerald-950/20 rounded-xl space-y-4">
+          <h3 class="font-bold text-emerald-900 dark:text-emerald-300 text-sm uppercase tracking-wider">
+            <i class="fa-solid fa-file-invoice-dollar mr-2"></i> $14,300 Net Liquid Vehicle Equity Provenance Audit
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center text-xs">
+            <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+              <span class="text-slate-500 block">Gross Vehicle Sale</span>
+              <strong class="text-slate-900 dark:text-white text-sm">$26,000 USD</strong>
+            </div>
+            <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+              <span class="text-slate-500 block">Documented Loan Payoff</span>
+              <strong class="text-red-600 text-sm">-$7,000 USD</strong>
+            </div>
+            <div class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700">
+              <span class="text-slate-500 block">Downpayment & Gear</span>
+              <strong class="text-slate-600 dark:text-slate-300 text-sm">-$4,700 USD</strong>
+            </div>
+            <div class="p-2 bg-emerald-100 dark:bg-emerald-900 rounded border border-emerald-300 text-emerald-900 dark:text-emerald-100">
+              <span class="block">Net Seasoned Savings</span>
+              <strong class="text-base font-extrabold">$14,300 CAD</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-2">
+            <span class="text-xs font-bold text-slate-500">Tab 5.1</span>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Vehicle Equity Sale Trail</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400">Bill of Sale, Payoff Confirmation, Bank Deposit Slips proving zero unverified cash.</p>
+            <button onclick="viewDoc('5.1')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">View Paper Trail</button>
+          </div>
+
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-2">
+            <span class="text-xs font-bold text-slate-500">Tab 5.2</span>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">Mother's Rent Support Affidavit</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400">Sworn commitment of $2,200/mo CAD for Kelowna housing, replacing Airbnb expenditures.</p>
+            <button onclick="viewDoc('5.2')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">View Affidavit</button>
+          </div>
+
+          <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-2">
+            <span class="text-xs font-bold text-slate-500">Tab 5.3</span>
+            <h4 class="font-bold text-slate-900 dark:text-white text-sm">6-Month Bank Statements</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-400">Complete bank statements demonstrating continuous liquidity and zero debt default.</p>
+            <button onclick="viewDoc('5.3')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">View Statements</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-tab6" class="tab-content hidden space-y-6">
+        <div class="border-b border-slate-200 dark:border-slate-700 pb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">Tab 6 Exhibits</span>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Immigration & Compliance History (GCMS ATIP Rebuttal)</h2>
+        </div>
+
+        <div class="p-4 border border-red-200 dark:border-red-900/60 bg-red-50/40 dark:bg-red-950/20 rounded-xl space-y-2">
+          <h3 class="font-bold text-red-900 dark:text-red-300 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-file-contract"></i> ATIP File Release P-2026-30692 Target Record Analysis
+          </h3>
+          <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+            Exhibits in this tab provide direct documentary evidence rebutting the Osoyoos POE officer's findings on June 3, 2026, establishing a 100% voluntary departure rate across all Canadian immigration interactions.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300">Tab 6.1</span>
+              <i class="fa-solid fa-file-alt text-red-600"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">CBSA ATIP File Release</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Full CBSA ATIP Disclosure (File P-2026-30692) containing the complete GCMS notes and examination details.
+            </p>
+            <button onclick="viewDoc('6.1')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">Inspect Release →</button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">Tab 6.2</span>
+              <i class="fa-solid fa-passport text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Sept 23, 2024 Voluntary Exit</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              IRCC Portal record & CBP entry stamp confirming immediate voluntary departure following Visitor Record refusal V353909420.
+            </p>
+            <button onclick="viewDoc('6.2')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">Inspect Proof →</button>
+          </div>
+
+          <div class="p-5 border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900/50 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300">Tab 6.3</span>
+              <i class="fa-solid fa-file-signature text-emerald-600"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 dark:text-white">June 3, 2026 Form IMM 1282</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400">
+              Executed CBSA Form IMM 1282 (Allowed to Leave) demonstrating voluntary compliance at the Osoyoos POE.
+            </p>
+            <button onclick="viewDoc('6.3')" class="text-xs text-navy-600 dark:text-gold-400 font-semibold hover:underline">Inspect IMM 1282 →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-tab7" class="tab-content hidden space-y-8">
+        <AiLegalSuite client:visible />
+      </div>
+    </div>
+  </main>
+
+  <DocumentModal client:load />
+</BaseLayout>
