@@ -37,4 +37,12 @@ This package compiles statutory legal briefs, family court mandates, financial p
 
 ---
 
+## 🧭 Guiding Strategy Documents (Not Part of the Binder)
+
+The [`strategy/`](./strategy) folder holds internal planning documents that inform *what goes into* the binder — they are not submission exhibits and are not exposed as binder tabs.
+
+* [`strategy/Master_Strategy_Brief_v2_July_2026.md`](./strategy/Master_Strategy_Brief_v2_July_2026.md) — the current master strategy brief (supersedes the July 2026 Three-Stage Bridge Brief), covering the sequenced action plan across the outland TRP, bounded visitor entry, POE TRP fallback, and in-Canada H&C tracks. Update the binder's contents against this brief as the case progresses.
+
+---
+
 ## 📂 Binder Structure & Tab Breakdown
