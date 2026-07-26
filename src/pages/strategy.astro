@@ -4,14 +4,74 @@ import path from 'node:path';
 import { marked } from 'marked';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ThemeToggle from '../components/ThemeToggle.tsx';
+import SectionTabBar, { type SectionTab } from '../components/SectionTabBar.tsx';
 
 // Rendered at BUILD TIME (unlike the original strategy.html, which fetched
 // and parsed the markdown client-side with marked.js on every page load).
 // The markdown file remains the single source of truth — its content is
-// not duplicated anywhere else in the repo.
+// not duplicated anywhere else in the repo. The brief's own "## N. TITLE"
+// headings are parsed into tabs here so the page matches the binder's
+// tabbed layout instead of one long scroll.
 const mdPath = path.join(process.cwd(), 'strategy', 'Master_Strategy_Brief_v2_July_2026.md');
 const markdown = fs.readFileSync(mdPath, 'utf-8');
-const briefHtml = marked.parse(markdown, { async: false }) as string;
+
+const firstRuleIdx = markdown.indexOf('\n---\n');
+const preambleMd = markdown.slice(0, firstRuleIdx === -1 ? undefined : firstRuleIdx).trim();
+const bodyMd = firstRuleIdx === -1 ? '' : markdown.slice(firstRuleIdx + 5);
+
+// Preamble fields: title, two subtitle lines, then four "**Label:** value" lines.
+const preambleLines = preambleMd.split('\n').filter((l) => l.trim().length > 0);
+const briefTitle = preambleLines[0]?.replace(/^#\s*/, '') ?? 'Master Strategy Brief';
+const subtitles = preambleLines
+  .slice(1)
+  .filter((l) => l.startsWith('###'))
+  .map((l) => l.replace(/^###\s*/, ''));
+const metaFields = preambleLines
+  .filter((l) => /^\*\*[^*]+:\*\*/.test(l))
+  .map((l) => {
+    const match = l.match(/^\*\*([^*]+):\*\*\s*(.+)$/);
+    return match ? { label: match[1].trim(), value: match[2].trim() } : null;
+  })
+  .filter((f): f is { label: string; value: string } => f !== null);
+
+// Short tab labels — the brief's full section titles (e.g. "WHAT THIS
+// RESEARCH CYCLE VERIFIED, CORRECTED, OR ADDED") are too long for tab
+// buttons; the full title still renders as the panel heading below. Falls
+// back to the parsed title if the brief gains a section not listed here.
+const shortLabels: Record<string, string> = {
+  '1': 'Executive Summary',
+  '2': 'Verified & Corrected',
+  '3': 'Comparative Options',
+  '4': 'Action Plan',
+  '5': 'Stage 1 Deep-Dive',
+  '6': 'Document Checklist',
+  '7': 'June 3 Findings Map',
+  '8': 'Counsel Sign-Off',
+  '9': 'Sourcing',
+  '10': 'Guidance Going Forward',
+};
+
+const sectionRegex = /^## (\d+)\.\s+(.+)$/gm;
+const matches = [...bodyMd.matchAll(sectionRegex)];
+const sections = matches.map((m, i) => {
+  const num = m[1];
+  const title = m[2].trim();
+  const start = m.index! + m[0].length;
+  const end = i + 1 < matches.length ? matches[i + 1].index! : bodyMd.length;
+  const contentMd = bodyMd.slice(start, end).trim();
+  return {
+    id: `s${num}`,
+    num,
+    title,
+    html: marked.parse(contentMd, { async: false }) as string,
+  };
+});
+
+const tabs: SectionTab[] = sections.map((s) => ({
+  id: s.id,
+  badge: s.num,
+  label: shortLabels[s.num] ?? s.title,
+}));
 ---
 
 <BaseLayout
@@ -19,7 +79,7 @@ const briefHtml = marked.parse(markdown, { async: false }) as string;
   description="Master Strategy Brief — internal guiding document for the TRP Application Binder (not a submission exhibit)."
 >
   <header class="no-print bg-navy-900 text-white border-b border-navy-700 sticky top-0 z-40 shadow-md">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="flex items-center space-x-3">
           <div class="p-2 bg-navy-800 border border-gold-500/40 rounded-lg text-gold-400">
@@ -33,7 +93,7 @@ const briefHtml = marked.parse(markdown, { async: false }) as string;
               <span class="text-xs text-slate-400">| Not a Binder Exhibit</span>
             </div>
             <h1 class="text-lg font-bold tracking-tight text-white">
-              Master Strategy Brief
+              {briefTitle}
             </h1>
           </div>
         </div>
@@ -61,14 +121,52 @@ const briefHtml = marked.parse(markdown, { async: false }) as string;
     </div>
   </header>
 
-  <main class="flex-grow max-w-5xl w-full mx-auto px-2 sm:px-4 lg:px-8 py-6 flex flex-col">
+  <main class="flex-grow max-w-7xl w-full mx-auto px-2 sm:px-4 lg:px-8 py-6 flex flex-col">
     <div class="no-print mb-4 px-4 py-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 text-sm text-amber-900 dark:text-amber-200 flex items-start gap-2">
       <i class="fa-solid fa-circle-info mt-0.5"></i>
       <span>This brief is an internal planning document. It guides what goes into the TRP Application Binder as the case progresses — it is not itself a binder tab or submission exhibit.</span>
     </div>
 
-    <div id="brief-content" class="binder-container flex-grow bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 p-4 sm:p-8">
-      <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:font-sans prose-a:text-navy-700 dark:prose-a:text-gold-400 prose-table:text-sm" set:html={briefHtml} />
+    <!-- Brief Overview Bar (mirrors the binder's Case Overview Bar) -->
+    <div class="no-print mb-6 bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-5 shadow-sm border border-slate-200 dark:border-slate-700">
+      {subtitles.length > 0 && (
+        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 space-y-0.5">
+          {subtitles.map((s) => <span class="block">{s}</span>)}
+        </p>
+      )}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {metaFields.map((f, i) => {
+          const colors = ['border-navy-600', 'border-emerald-500', 'border-amber-500', 'border-blue-500'];
+          return (
+            <div class={`border-l-2 ${colors[i % colors.length]} pl-3`}>
+              <span class="block text-xs text-slate-500 dark:text-slate-400 uppercase font-medium">{f.label}</span>
+              <span class="text-sm font-semibold text-slate-900 dark:text-slate-100">{f.value}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+
+    <SectionTabBar tabs={tabs} client:load />
+
+    <div class="binder-container flex-grow bg-white dark:bg-slate-800 rounded-b-xl lg:rounded-tr-xl shadow-xl border border-slate-200 dark:border-slate-700 p-4 sm:p-8 relative">
+      {sections.map((s, i) => (
+        <div
+          id={`content-${s.id}`}
+          class={`brief-tab-content tab-content space-y-6 ${i === 0 ? '' : 'hidden'}`}
+        >
+          <div class="border-b border-slate-200 dark:border-slate-700 pb-3">
+            <span class="text-xs font-semibold uppercase tracking-wider text-navy-600 dark:text-gold-400">
+              Strategy Brief — Section {s.num}
+            </span>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">{s.title}</h2>
+          </div>
+          <div
+            class="prose prose-slate dark:prose-invert max-w-none prose-headings:font-sans prose-a:text-navy-700 dark:prose-a:text-gold-400 prose-table:text-sm"
+            set:html={s.html}
+          />
+        </div>
+      ))}
     </div>
   </main>
 </BaseLayout>
