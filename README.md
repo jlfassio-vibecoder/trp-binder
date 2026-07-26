@@ -45,4 +45,31 @@ The [`strategy/`](./strategy) folder holds internal planning documents that info
 
 ---
 
+## 🛠️ Development
+
+This site is built with [Astro](https://astro.build) using React islands (via `@astrojs/react`) for the
+interactive pieces, and Tailwind CSS v4 (via `@tailwindcss/vite`) for styling. The Master Strategy Brief
+markdown is rendered to static HTML at build time. It's no longer viewable by opening a raw `.html` file
+directly — it's compiled into a static site and deployed automatically via GitHub Actions.
+
+```bash
+npm install       # install dependencies
+npm run dev       # start the local dev server (with hot reload)
+npm run build     # produce a production build in dist/
+npm run preview   # preview the production build locally
+```
+
+Key source locations:
+
+* `src/pages/index.astro` — the binder page (header, stat bar, all 7 tabs)
+* `src/pages/strategy.astro` — the Master Strategy Brief viewer (renders `strategy/*.md` at build time)
+* `src/components/` — React islands: `ThemeToggle`, `BinderSearch`, `TabBar`, `DocumentModal`, `AiLegalSuite`
+* `src/layouts/BaseLayout.astro` — shared `<head>`/`<body>` shell and global styles
+* `.github/workflows/deploy.yml` — builds and publishes `dist/` to GitHub Pages on every push to `main`
+
+The Tab 7 AI Legal Suite tools call the Gemini/Imagen APIs directly from the browser with a runtime/user-supplied
+API key (`apiKey = ""` in `AiLegalSuite.tsx`) — there is no server-side proxy, matching the original design.
+
+---
+
 ## 📂 Binder Structure & Tab Breakdown

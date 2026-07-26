@@ -1,0 +1,74 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { marked } from 'marked';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ThemeToggle from '../components/ThemeToggle.tsx';
+
+// Rendered at BUILD TIME (unlike the original strategy.html, which fetched
+// and parsed the markdown client-side with marked.js on every page load).
+// The markdown file remains the single source of truth — its content is
+// not duplicated anywhere else in the repo.
+const mdPath = path.join(process.cwd(), 'strategy', 'Master_Strategy_Brief_v2_July_2026.md');
+const markdown = fs.readFileSync(mdPath, 'utf-8');
+const briefHtml = marked.parse(markdown, { async: false }) as string;
+---
+
+<BaseLayout
+  title="Master Strategy Brief | Guiding Document"
+  description="Master Strategy Brief — internal guiding document for the TRP Application Binder (not a submission exhibit)."
+>
+  <header class="no-print bg-navy-900 text-white border-b border-navy-700 sticky top-0 z-40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-navy-800 border border-gold-500/40 rounded-lg text-gold-400">
+            <i class="fa-solid fa-compass text-xl"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-gold-500/20 text-gold-300 border border-gold-500/30 rounded">
+                Guiding Document
+              </span>
+              <span class="text-xs text-slate-400">| Not a Binder Exhibit</span>
+            </div>
+            <h1 class="text-lg font-bold tracking-tight text-white">
+              Master Strategy Brief
+            </h1>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button
+            onclick="window.print()"
+            class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-white rounded font-medium flex items-center gap-1.5 transition"
+            title="Print or Save to PDF"
+          >
+            <i class="fa-solid fa-print"></i>
+            <span class="hidden sm:inline">Print / PDF</span>
+          </button>
+          <a
+            href="../"
+            class="px-3 py-1.5 bg-navy-800 hover:bg-navy-700 text-white rounded font-medium flex items-center gap-1.5 transition border border-navy-700"
+            title="Back to Binder"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+            <span class="hidden sm:inline">Back to Binder</span>
+          </a>
+          <ThemeToggle client:load />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-5xl w-full mx-auto px-2 sm:px-4 lg:px-8 py-6 flex flex-col">
+    <div class="no-print mb-4 px-4 py-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 text-sm text-amber-900 dark:text-amber-200 flex items-start gap-2">
+      <i class="fa-solid fa-circle-info mt-0.5"></i>
+      <span>This brief is an internal planning document. It guides what goes into the TRP Application Binder as the case progresses — it is not itself a binder tab or submission exhibit.</span>
+    </div>
+
+    <div id="brief-content" class="binder-container flex-grow bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-slate-200 dark:border-slate-700 p-4 sm:p-8">
+      <div class="prose prose-slate dark:prose-invert max-w-none prose-headings:font-sans prose-a:text-navy-700 dark:prose-a:text-gold-400 prose-table:text-sm" set:html={briefHtml} />
+    </div>
+  </main>
+</BaseLayout>

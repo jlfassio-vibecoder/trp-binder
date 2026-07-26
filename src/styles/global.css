@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Single source of truth for the navy/gold palette + fonts, shared by
+   index.astro and strategy.astro (previously duplicated as two separate
+   inline `tailwind.config = {...}` blocks in index.html and strategy.html). */
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Merriweather", serif;
+
+  --color-navy-50: #f0f4f8;
+  --color-navy-100: #d9e2ec;
+  --color-navy-200: #bccadc;
+  --color-navy-300: #9fb3c8;
+  --color-navy-400: #829ab1;
+  --color-navy-500: #627d98;
+  --color-navy-600: #486581;
+  --color-navy-700: #334e68;
+  --color-navy-800: #243b53;
+  --color-navy-900: #102a43;
+  --color-navy-950: #0b1d30;
+
+  --color-gold-50: #fffbe6;
+  --color-gold-100: #fff1b8;
+  --color-gold-200: #ffe58f;
+  --color-gold-300: #ffd666;
+  --color-gold-400: #ffc069;
+  --color-gold-500: #faad14;
+  --color-gold-600: #d48806;
+  --color-gold-700: #ad6800;
+}
+
+/* Tailwind v4 dark mode variant driven by a `.dark` class on <html>,
+   matching the original `darkMode: 'class'` behavior. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.tab-shadow {
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.stamp-badge {
+  border: 2px dashed #b91c1c;
+  color: #b91c1c;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transform: rotate(-3deg);
+}
+
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  body { background: white !important; color: black !important; font-size: 11pt; }
+  .tab-content { display: block !important; page-break-before: always; }
+  .binder-container { border: none !important; box-shadow: none !important; }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
